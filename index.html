@@ -1,12 +1,36 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>test</h1>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <title>Website_proxy</title>
+        <style>
+            html{
+                height: 100%;
+                width: 100%;
+            }
+            iframe{
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                border: none;
+            }
+        </style>
+    </head>
+    <body>
+        <iframe id="page" src=""></iframe>
+        <script>
+            const Page=`https://106.52.139.248/`;
+            document.getElementById("page").src=Page+location.hash.slice(1);
+            window.addEventListener("load",()=>{
+                window.addEventListener("message",(e)=>{
+                    console.log(e.data);
+                    window.history.pushState({},0,location.origin+'#'+e.data);
+                });
+            });
+        </script>
+    </body>
 </html>
